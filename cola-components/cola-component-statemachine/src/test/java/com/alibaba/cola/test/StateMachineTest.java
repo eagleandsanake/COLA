@@ -5,6 +5,7 @@ import com.alibaba.cola.statemachine.Condition;
 import com.alibaba.cola.statemachine.StateMachine;
 import com.alibaba.cola.statemachine.StateMachineFactory;
 import com.alibaba.cola.statemachine.builder.AlertFailCallback;
+import com.alibaba.cola.statemachine.builder.NumbFailCallback;
 import com.alibaba.cola.statemachine.builder.StateMachineBuilder;
 import com.alibaba.cola.statemachine.builder.StateMachineBuilderFactory;
 import com.alibaba.cola.statemachine.exception.TransitionFailException;
@@ -194,7 +195,7 @@ public class StateMachineTest {
                                 .next(new ChainActionTwo())
                 )
         ;
-        builder.setFailCallback((states,events,context)->{throw new RuntimeException("不可流转");});
+        builder.setFailCallback(new NumbFailCallback());
         builder.build("aaaa").fireEvent(States.STATE1,Events.EVENT2,new Context());
 
     }
